@@ -6,18 +6,16 @@
 		<RootNamespace>Toggl.Api</RootNamespace>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<Company>Panoramic Data Limited</Company>
+		<Company>Divine Technology Systems</Company>
 		<Description>Toggl API</Description>
-		<Copyright>Panoramic Data Limited 2021</Copyright>
+		<Copyright>Divine Technology Systems 2022</Copyright>
 		<PackageIcon>Icon.png</PackageIcon>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://bitbucket.org/panoramicdata/toggl.api</PackageProjectUrl>
-		<RepositoryUrl>https://bitbucket.org/panoramicdata/toggl.api</RepositoryUrl>
-		<RepositoryType>Git</RepositoryType>
-		<Authors>Panoramic Data Limited</Authors>
-		<PackageReleaseNotes>
-			List of int64 items in URL parameters fixed
-		</PackageReleaseNotes>
+		<PackageProjectUrl>https://github.com/DTSChurch/Toggl.Api</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/DTSChurch/Toggl.Api</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<Authors>Divine Technology Systems, Panoramic Data Limited</Authors>
+		<PackageReleaseNotes>Port to .NET Framework 4.5.2</PackageReleaseNotes>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
