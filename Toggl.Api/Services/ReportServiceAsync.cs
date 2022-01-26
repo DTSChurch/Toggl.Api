@@ -53,5 +53,8 @@ namespace Toggl.Api.Services
 
 			return resultReport!;
 		}
+
+		public Task<SummaryReport> GetSummaryReportAsync(SummaryReportParams requestParameters) => 
+			TogglSrv.GetAsync<SummaryReport>(ApiRoutes.Reports.Summary, requestParameters.ToKeyValuePair());
 	}
 }
