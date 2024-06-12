@@ -1,44 +1,54 @@
 using FluentAssertions;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Toggl.Api.Test
+namespace Toggl.Api.Test;
+
+public class WorkspaceTests(ITestOutputHelper testOutputHelper) : TogglTest(testOutputHelper)
 {
-	public class WorkspaceTests : TogglTest
+	[Fact]
+	public async Task Workspaces_GetById_Succeeds()
 	{
-		public WorkspaceTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-		{
-		}
+		var workspace = await TogglClient
+			.Workspaces
+			.GetAsync(await GetWorkspaceIdAsync(), default);
 
-		[Fact]
-		public async void List()
-		{
-			var workspaces = await TogglClient
-				.Workspaces
-				.GetAllAsync()
-				.ConfigureAwait(false);
-			workspaces.Should().NotBeNullOrEmpty();
-		}
+		workspace.Should().NotBeNull();
+	}
 
-		[Fact]
-		public async void ListProjectUsers()
-		{
-			var workspaces = await TogglClient
-				.Workspaces
-				.GetAllAsync()
-				.ConfigureAwait(false);
-			workspaces.Should().NotBeNullOrEmpty();
-			var workspaceId = workspaces[0].Id;
+	[Fact]
+	public async Task Workspaces_GetClients_Succeeds()
+	{
+		var workspace = await TogglClient
+			.Workspaces
+			.GetClientsAsync(await GetWorkspaceIdAsync(), null, null, default);
 
-			var projectUsers = await TogglClient
-				.Workspaces
-				.GetProjectUsersAsync(workspaceId)
-				.ConfigureAwait(false);
-			projectUsers.Should().NotBeNullOrEmpty();
-			projectUsers.Should().OnlyContain(pu => pu.Id != 0);
-			projectUsers.Should().OnlyContain(pu => pu.UserId != 0);
-			projectUsers.Should().OnlyContain(pu => pu.ProjectId != 0);
-			projectUsers.Should().OnlyContain(pu => pu.WorkspaceId != 0);
-		}
+		workspace.Should().NotBeNull();
+	}
+
+	[Fact]
+	public async Task Workspaces_GetUsers_Succeeds()
+	{
+		var organizationId = await GetOrganizationIdAsync();
+		var workspaceId = await GetWorkspaceIdAsync();
+
+		var users = await TogglClient
+			.Workspaces
+			.GetUsersAsync(organizationId, workspaceId, default);
+
+		users.Should().NotBeNull();
+	}
+
+	[Fact]
+	public async Task Workspaces_GetProjects_Succeeds()
+	{
+		var workspaceId = await GetWorkspaceIdAsync();
+
+		var projects = await TogglClient
+			.Workspaces
+			.GetProjectsAsync(workspaceId, default);
+
+		projects.Should().NotBeNull();
 	}
 }
